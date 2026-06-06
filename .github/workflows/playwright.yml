@@ -32,7 +32,7 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chrome --with-deps
       - name: Write auth state
         env:
           AUTH_USER_JSON: ${{ secrets.AUTH_USER_JSON }}
