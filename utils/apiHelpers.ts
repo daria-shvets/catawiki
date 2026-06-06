@@ -4,6 +4,12 @@ export async function removeAllFavourites(request: APIRequestContext) {
   const response = await request.get(
     "https://www.catawiki.com/buyer/api/v3/users/me/interests/lots?page=1&per_page=96&filter=favorites&status=all"
   );
+
+  if (!response.ok()) {
+    console.error(`Failed to fetch favourites: ${response.status()}`);
+    return;
+  }
+
   const data = await response.json();
 
   for (const lot of data.lots) {
