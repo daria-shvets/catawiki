@@ -37,9 +37,7 @@ test("user should be able to sign in and sign out", async ({ page }) => {
 
     await test.step("8. Verify user is logged out", async () => {
       await expect(
-        page
-          .locator("header.c-header")
-          .getByRole("button", { name: "Sign in" }),
+        page.locator("header.c-header").getByRole("button", { name: "Sign in" })
       ).toBeVisible();
     });
   });

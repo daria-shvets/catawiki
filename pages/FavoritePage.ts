@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
 export class FavoritePage extends HeaderPage {
