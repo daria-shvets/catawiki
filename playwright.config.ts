@@ -13,9 +13,10 @@ export default defineConfig({
   use: {
     baseURL: "https://www.catawiki.com",
     trace: "on-first-retry",
-    headless: false, // required — Catawiki blocks headless browsers
+    headless: process.env.CI ? true : false, // required — Catawiki blocks headless browsers
     userAgent:
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    video: "retain-on-failure",
   },
 
   projects: [
