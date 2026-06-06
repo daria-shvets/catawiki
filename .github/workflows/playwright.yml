@@ -36,9 +36,11 @@ jobs:
       - name: Write auth state
         env:
           AUTH_USER_JSON: ${{ secrets.AUTH_USER_JSON }}
+          AUTH_COOKIES_JSON: ${{ secrets.AUTH_COOKIES_JSON }}
         run: |
           mkdir -p .auth
           echo "$AUTH_USER_JSON" > .auth/user.json
+          echo "$AUTH_COOKIES_JSON" > .auth/cookies.json
       - name: Run Playwright tests
         run: npx playwright test --retries=2
         env:
