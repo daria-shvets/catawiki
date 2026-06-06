@@ -161,10 +161,16 @@ The GitHub Actions pipeline runs on every push and pull request to `main`. Quali
 
 **Artifacts** — HTML report and raw test results (including failure videos) are uploaded after every run and retained for 30 days, accessible from the GitHub Actions tab.
 
-For CI authentication, store the contents of `.auth/user.json` as a `AUTH_USER_JSON` GitHub Secret. The pipeline writes it to disk before tests run.
+**Headed mode** — tests run headed locally to bypass Catawiki's bot protection, which blocks headless browsers. In CI, headless mode is enabled automatically via the `process.env.CI` flag. Pre-saved session state injected via GitHub Secrets ensures authenticated tests still pass in the pipeline.
 
-**Headed mode** — tests run in headed mode locally to bypass Catawiki's bot
-protection, which blocks headless browsers. In CI, headless mode is used
-automatically via `process.env.CI` flag. This means some tests may be affected
-by bot protection in the pipeline — the recommended workaround is to inject
-pre-saved session state via GitHub Secrets, which this project already does.
+**CI authentication** — store the contents of `.auth/user.json` as an `AUTH_USER_JSON` GitHub Secret. The pipeline writes it to disk before tests run.
+
+## Local Development
+
+**Run quality checks before pushing:**
+
+```bash
+npm run check
+```
+
+Husky is configured to run the same checks automatically before every commit — it activates on `npm ci`, no extra setup needed.
