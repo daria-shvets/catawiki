@@ -28,7 +28,7 @@ test("should open lot page and log information", async ({ page }) => {
     await lotPage.verifyLotPageLoaded();
   });
 
-  await test.step("6-7. Log lot name, favourites count and current bid", async () => {
+  await test.step("6. Log lot name, favourites count and current bid", async () => {
     await lotPage.logLotName();
     await lotPage.logFavouriteButtonCount();
     await lotPage.logCurrentBid();

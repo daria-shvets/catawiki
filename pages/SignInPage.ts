@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { ExistingUserData } from "@test-data/user-data";
+import { existingUserData } from "@test-data/user-data";
 import { getEnvVar } from "../utils/env";
 
-const { email } = ExistingUserData.validSignIn;
+const { email } = existingUserData.validSignIn;
 const password = getEnvVar("TEST_USER_PASSWORD");
 
 export class SignInPage extends BasePage {

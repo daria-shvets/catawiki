@@ -17,7 +17,7 @@ interface ExistingUserData {
   email: string;
 }
 
-export const ExistingUserData = {
+export const existingUserData = {
   validSignIn: {
     email: "signup.cataw+2123@gmail.com",
     // password loaded from env at runtime
