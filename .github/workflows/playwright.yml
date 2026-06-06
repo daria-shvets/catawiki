@@ -34,9 +34,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Write auth state
+        env:
+          AUTH_USER_JSON: ${{ secrets.AUTH_USER_JSON }}
         run: |
           mkdir -p .auth
-          echo '${{ secrets.AUTH_USER_JSON }}' > .auth/user.json
+          echo "$AUTH_USER_JSON" > .auth/user.json
       - name: Run Playwright tests
         run: npx playwright test --retries=2
         env:
