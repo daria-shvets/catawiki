@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class HeaderPage extends BasePage {
@@ -36,10 +36,5 @@ export class HeaderPage extends BasePage {
 
   async clickSignOutButton() {
     await this.signOutButton.click();
-  }
-
-  async verifySearchLoaded() {
-    await expect(this.searchInput).toBeVisible();
-    await expect(this.searchInput).toBeEnabled();
   }
 }

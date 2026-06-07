@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { HomePage } from "@pages/HomePage";
 
 test("home page should load", async ({ page }) => {
@@ -9,14 +9,16 @@ test("home page should load", async ({ page }) => {
   });
 
   await test.step("Verify category navigation is visible and clickable", async () => {
-    await homePage.verifyCategoryNavigationLoaded();
+    await expect(homePage.navigation).toBeVisible({ timeout: 10000 });
+    await expect(homePage.navigation).toBeEnabled();
   });
 
   await test.step("Verify search bar is visible", async () => {
-    await homePage.verifySearchLoaded();
+    await expect(homePage.searchInput).toBeVisible();
+    await expect(homePage.searchInput).toBeEnabled();
   });
 
   await test.step("Verify home page content is visible'", async () => {
-    await homePage.verifyHomePageContentLoaded();
+    await expect(homePage.homePageContent).toBeVisible();
   });
 });

@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
 export class LotPage extends HeaderPage {
@@ -23,16 +23,6 @@ export class LotPage extends HeaderPage {
     this.placeBidButton = page
       .getByRole("button", { name: "Place bid" })
       .first();
-  }
-
-  async verifyLotPageLoaded() {
-    await expect(this.bidSection).toBeVisible();
-    await expect(this.lotName).toBeVisible();
-    await expect(this.lotGallery).toBeVisible({ timeout: 10000 });
-    await expect(this.placeBidButton).toBeVisible({ timeout: 10000 });
-    await expect(this.placeBidButton).toBeEnabled();
-    await expect(this.favouriteButton).toBeVisible({ timeout: 10000 });
-    await expect(this.favouriteButton).toBeEnabled();
   }
 
   async logLotName() {

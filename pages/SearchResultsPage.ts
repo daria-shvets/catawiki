@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
 export class SearchResultsPage extends HeaderPage {
@@ -11,11 +11,7 @@ export class SearchResultsPage extends HeaderPage {
     this.searchPageTestId = page.getByTestId("SearchResults");
   }
 
-  async verifySearchPageLoaded() {
-    await expect(this.searchPageTestId).toBeVisible();
-  }
-
-  async clickLot(lotNumber: number) {
-    await this.lotCard.nth(lotNumber).click();
+  async clickLot(lotIndex: number) {
+    await this.lotCard.nth(lotIndex).click();
   }
 }

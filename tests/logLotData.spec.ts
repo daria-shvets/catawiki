@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { HomePage } from "@pages/HomePage";
 import { LotPage } from "@pages/LotPage";
 import { SearchResultsPage } from "@pages/SearchResultsPage";
@@ -18,7 +18,7 @@ test("should open lot page and log information", async ({ page }) => {
   });
 
   await test.step("Verify search results page is opened", async () => {
-    await searchResultsPage.verifySearchPageLoaded();
+    await expect(searchResultsPage.searchPageTestId).toBeVisible();
   });
 
   await test.step("Click on the second lot", async () => {
@@ -26,7 +26,13 @@ test("should open lot page and log information", async ({ page }) => {
   });
 
   await test.step("Verify lot page is opened", async () => {
-    await lotPage.verifyLotPageLoaded();
+    await expect(lotPage.bidSection).toBeVisible();
+    await expect(lotPage.lotName).toBeVisible();
+    await expect(lotPage.lotGallery).toBeVisible({ timeout: 10000 });
+    await expect(lotPage.placeBidButton).toBeVisible({ timeout: 10000 });
+    await expect(lotPage.placeBidButton).toBeEnabled();
+    await expect(lotPage.favouriteButton).toBeVisible({ timeout: 10000 });
+    await expect(lotPage.favouriteButton).toBeEnabled();
   });
 
   await test.step("Log lot name, favourites count and current bid", async () => {

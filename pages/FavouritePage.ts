@@ -4,7 +4,6 @@ import { HeaderPage } from "./HeaderPage";
 const FAVOURITE_PAGE_ROUTE = "/en/interests/objects";
 
 export class FavouritePage extends HeaderPage {
-  static readonly route = FAVOURITE_PAGE_ROUTE;
   readonly lotContainer: Locator;
   readonly favouriteButton: Locator;
 

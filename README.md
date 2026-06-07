@@ -44,8 +44,10 @@ Locators are chosen in this priority order:
 
 1. `getByRole()` — Playwright's recommended approach, accessible and resilient to styling changes
 2. `getByTestId()` — used when role-based selectors are not specific enough
-3. `data-sentry-component` attributes — Catawiki uses Sentry for error monitoring, which adds stable component-level attributes to the DOM. These map directly to React component names and are resilient to CSS refactoring
-4. CSS classes — last resort, only when no better option exists
+3. `data-sentry-component` attributes — Catawiki uses Sentry for error monitoring, which adds stable component-level attributes to the DOM. These map directly to React component names and are resilient to CSS refactoring. This was discovered by inspecting the DOM and used as a stable alternative to CSS classes.
+4. CSS classes — last resort, only when no better option exists.
+
+In a real team environment options 3 and 4 would be avoided entirely by requesting `data-testid` attributes from developers or adding them directly to the codebase.
 
 Where multiple elements share the same locator (e.g. sticky bidding panels duplicating the main bid section), locators are scoped to a stable parent container to avoid strict mode violations.
 
@@ -102,7 +104,7 @@ Playwright's default bundled Chromium is detectable by bot protection systems �
 
 ### Authenticated API Calls in beforeAll
 
-The default Playwright `request` fixture doesn't inherit browser cookies, so API cleanup calls were returning 403. The fix was to create a browser context with `storageState` explicitly and use its request context.
+The default Playwright `request` fixture doesn't inherit browser cookies, so API cleanup calls were returning 403. The fix was to create a browser context with `storageState` explicitly and execute API calls via `page.evaluate` using the browser's native `fetch` with `credentials: "include"` — ensuring requests use the actual browser session with all cookies automatically included, including the short-lived `x-s-csrf-token` required by Catawiki's DELETE endpoint.
 
 ### Sign Up Test
 

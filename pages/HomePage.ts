@@ -1,10 +1,9 @@
-import { Locator, Page, expect } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
 const HOME_PAGE_ROUTE = "/en";
 
 export class HomePage extends HeaderPage {
-  static readonly route = HOME_PAGE_ROUTE;
   readonly createAccountButton: Locator;
   readonly navigation: Locator;
   readonly homePageContent: Locator;
@@ -28,14 +27,5 @@ export class HomePage extends HeaderPage {
 
   async clickCreateAccountButton() {
     await this.createAccountButton.click();
-  }
-
-  async verifyCategoryNavigationLoaded() {
-    await expect(this.navigation).toBeVisible({ timeout: 10000 });
-    await expect(this.navigation).toBeEnabled();
-  }
-
-  async verifyHomePageContentLoaded() {
-    await expect(this.homePageContent).toBeVisible();
   }
 }
