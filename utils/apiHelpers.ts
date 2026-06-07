@@ -8,13 +8,12 @@ export async function removeAllFavourites(context: BrowserContext) {
   const csrfToken =
     cookies.find((c) => c.name === "x-s-csrf-token")?.value ?? "";
 
-  await page.close();
-
-  const response = await context.request.get(
+  const response = await page.request.get(
     "https://www.catawiki.com/buyer/api/v3/users/me/interests/lots?page=1&per_page=96&filter=favorites&status=all"
   );
 
   if (!response.ok()) {
+    await page.close();
     throw new Error(`Failed to fetch favourites: ${response.status()}`);
   }
 
@@ -22,7 +21,7 @@ export async function removeAllFavourites(context: BrowserContext) {
 
   await Promise.all(
     data.lots.map(async (lot: { id: number }) => {
-      const deleteResponse = await context.request.delete(
+      const deleteResponse = await page.request.delete(
         `https://www.catawiki.com/buyer/api/v1/users/me/interests/lots/${lot.id}`,
         { headers: { "x-s-csrf-token": csrfToken } }
       );
@@ -34,4 +33,6 @@ export async function removeAllFavourites(context: BrowserContext) {
       }
     })
   );
+
+  await page.close();
 }
