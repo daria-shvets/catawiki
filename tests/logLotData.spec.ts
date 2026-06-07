@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import { HomePage } from "@pages/HomePage";
 import { LotPage } from "@pages/LotPage";
 import { SearchResultsPage } from "@pages/SearchResultsPage";
+import { searchTerms } from "@test-data/testData";
 
 test("should open lot page and log information", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -9,11 +10,11 @@ test("should open lot page and log information", async ({ page }) => {
   const lotPage = new LotPage(page);
 
   await test.step("Navigate to Catawiki homepage", async () => {
-    await homePage.goto("/en");
+    await homePage.goto();
   });
 
   await test.step("Search for 'train'", async () => {
-    await homePage.searchForItem("train");
+    await homePage.searchForItem(searchTerms.train);
   });
 
   await test.step("Verify search results page is opened", async () => {

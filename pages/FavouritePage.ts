@@ -1,7 +1,10 @@
 import { Page, Locator } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
+const FAVOURITE_PAGE_ROUTE = "/en/interests/objects";
+
 export class FavouritePage extends HeaderPage {
+  static readonly route = FAVOURITE_PAGE_ROUTE;
   readonly lotContainer: Locator;
   readonly favouriteButton: Locator;
 
@@ -16,7 +19,7 @@ export class FavouritePage extends HeaderPage {
   }
 
   async goto() {
-    await this.page.goto("/en/interests/objects");
+    await this.page.goto(FAVOURITE_PAGE_ROUTE);
   }
 
   async clickFavouriteButton() {

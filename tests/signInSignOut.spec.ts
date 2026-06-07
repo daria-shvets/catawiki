@@ -8,7 +8,7 @@ test.skip("user should be able to sign in and sign out", async ({ page }) => {
   const signInPage = new SignInPage(page);
 
   await test.step("Navigate to Catawiki homepage", async () => {
-    await homePage.goto("/en");
+    await homePage.goto();
   });
 
   await test.step("Click 'Sign in'", async () => {

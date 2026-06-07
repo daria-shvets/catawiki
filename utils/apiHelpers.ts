@@ -15,8 +15,7 @@ export async function removeAllFavourites(context: BrowserContext) {
   );
 
   if (!response.ok()) {
-    console.error(`Failed to fetch favourites: ${response.status()}`);
-    return;
+    throw new Error(`Failed to fetch favourites: ${response.status()}`);
   }
 
   const data = await response.json();
@@ -33,7 +32,6 @@ export async function removeAllFavourites(context: BrowserContext) {
           `Failed to delete lot ${lot.id}: ${deleteResponse.status()}`
         );
       }
-      console.log(`Deleted lot ${lot.id}: ${deleteResponse.status()}`);
     })
   );
 }

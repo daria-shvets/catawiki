@@ -4,6 +4,7 @@ import { LotPage } from "@pages/LotPage";
 import { SearchResultsPage } from "@pages/SearchResultsPage";
 import { removeAllFavourites } from "@utils/apiHelpers";
 import { FavouritePage } from "@pages/FavouritePage";
+import { searchTerms } from "@test-data/testData";
 
 test.use({ storageState: ".auth/user.json" });
 
@@ -23,8 +24,8 @@ test("user should be able to add and remove lot from favourite", async ({
   const favouritePage = new FavouritePage(page);
 
   await test.step("Open lot page", async () => {
-    await homePage.goto("/en");
-    await homePage.searchForItem("book");
+    await homePage.goto();
+    await homePage.searchForItem(searchTerms.book);
     await searchResultsPage.clickLot(1);
   });
 

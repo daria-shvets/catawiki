@@ -9,13 +9,13 @@ const password = getEnvVar("TEST_USER_PASSWORD");
 export class SignInPage extends BasePage {
   readonly emailInput: Locator;
   readonly passwordInput: Locator;
-  readonly sigInButton: Locator;
+  readonly signInButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this.emailInput = page.getByRole("textbox", { name: "Email address" });
     this.passwordInput = page.getByRole("textbox", { name: "Password" });
-    this.sigInButton = page.getByRole("button", {
+    this.signInButton = page.getByRole("button", {
       name: "Sign in",
     });
   }
@@ -26,6 +26,6 @@ export class SignInPage extends BasePage {
   }
 
   async clickSignInButton() {
-    await this.sigInButton.click();
+    await this.signInButton.click();
   }
 }
