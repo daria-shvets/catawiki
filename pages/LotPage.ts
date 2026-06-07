@@ -4,20 +4,35 @@ import { HeaderPage } from "./HeaderPage";
 export class LotPage extends HeaderPage {
   readonly bidSection: Locator;
   readonly lotName: Locator;
-  readonly favoriteButton: Locator;
+  readonly favouriteButton: Locator;
   readonly currentBid: Locator;
+  readonly lotGallery: Locator;
+  readonly placeBidButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this.bidSection = page.getByTestId("lot-bid-status-section");
     this.lotName = page.getByRole("heading", { level: 1 });
-    this.favoriteButton = page.getByTitle("favourite").first();
-    this.currentBid = page.getByText(/€ \d+/).first();
+    this.favouriteButton = page.locator(
+      "[data-sentry-component='LotDetailsFavoriteButton'] button"
+    );
+    this.currentBid = page
+      .getByTestId("lot-bid-status-section")
+      .locator("[data-sentry-component='Amount']");
+    this.lotGallery = page.locator("[data-sentry-component='DesktopGallery']");
+    this.placeBidButton = page
+      .getByRole("button", { name: "Place bid" })
+      .first();
   }
 
   async verifyLotPageLoaded() {
     await expect(this.bidSection).toBeVisible();
     await expect(this.lotName).toBeVisible();
+    await expect(this.lotGallery).toBeVisible({ timeout: 10000 });
+    await expect(this.placeBidButton).toBeVisible({ timeout: 10000 });
+    await expect(this.placeBidButton).toBeEnabled();
+    await expect(this.favouriteButton).toBeVisible({ timeout: 10000 });
+    await expect(this.favouriteButton).toBeEnabled();
   }
 
   async logLotName() {
@@ -26,7 +41,7 @@ export class LotPage extends HeaderPage {
   }
 
   async logFavouriteButtonCount() {
-    const favouriteCount = await this.favoriteButton.innerText();
+    const favouriteCount = await this.favouriteButton.innerText();
     console.log("Favourite button count: " + favouriteCount);
   }
 
@@ -35,7 +50,7 @@ export class LotPage extends HeaderPage {
     console.log("Current bid: ", bidAmount);
   }
 
-  async clickFavoriteButton() {
-    await this.favoriteButton.click();
+  async clickFavouriteButton() {
+    await this.favouriteButton.click();
   }
 }

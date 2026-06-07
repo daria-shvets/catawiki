@@ -7,23 +7,23 @@ test.skip("user should be able to sign up", async ({ page }) => {
   const homePage = new HomePage(page);
   const signUpPage = new SignUpPage(page);
 
-  await test.step("1. Navigate to Catawiki homepage", async () => {
+  await test.step("Navigate to Catawiki homepage", async () => {
     await homePage.goto("/en");
   });
 
-  await test.step("2. Click 'Create account'", async () => {
+  await test.step("Click 'Create account'", async () => {
     await homePage.clickCreateAccountButton();
   });
 
-  await test.step("3. Fill out user data", async () => {
+  await test.step("Fill out user data", async () => {
     await signUpPage.fillOutUserDetails();
   });
 
-  await test.step("4. Click 'Agree and continue'", async () => {
-    await signUpPage.clickContiunueButton();
+  await test.step("Click 'Agree and continue'", async () => {
+    await signUpPage.clickContinueButton();
   });
 
-  await test.step("5. Verify user is logged in'", async () => {
+  await test.step("Verify user is logged in", async () => {
     await expect(page.getByTestId("display-username")).toBeVisible();
   });
 });

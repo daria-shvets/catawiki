@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { userSignUpData } from "@test-data/user-data";
+import { userSignUpData } from "@test-data/userData";
 import { getEnvVar } from "../utils/env";
 
 const { firstName } = userSignUpData.validSignUp;
@@ -33,7 +33,7 @@ export class SignUpPage extends BasePage {
     await this.passwordInput.fill(password);
   }
 
-  async clickContiunueButton() {
+  async clickContinueButton() {
     await this.agreeAndContinueButton.click();
   }
 }

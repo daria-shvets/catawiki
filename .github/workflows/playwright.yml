@@ -42,7 +42,7 @@ jobs:
           echo "$AUTH_USER_JSON" > .auth/user.json
           echo "$AUTH_COOKIES_JSON" > .auth/cookies.json
       - name: Run Playwright tests
-        run: npx playwright test --retries=2
+        run: npx playwright test
         env:
           TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
       - name: Upload test results

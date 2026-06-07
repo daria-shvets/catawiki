@@ -16,7 +16,6 @@ export class SearchResultsPage extends HeaderPage {
   }
 
   async clickLot(lotNumber: number) {
-    // nth() is zero-indexed, so we subtract 1 to match human-readable lot numbers
-    await this.lotCard.nth(lotNumber - 1).click();
+    await this.lotCard.nth(lotNumber).click();
   }
 }

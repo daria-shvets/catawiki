@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { existingUserData } from "@test-data/user-data";
+import { existingUserData } from "@test-data/userData";
 import { getEnvVar } from "../utils/env";
 
 const { email } = existingUserData.validSignIn;

@@ -1,17 +1,17 @@
 import { Page, Locator } from "@playwright/test";
 import { HeaderPage } from "./HeaderPage";
 
-export class FavoritePage extends HeaderPage {
+export class FavouritePage extends HeaderPage {
   readonly lotContainer: Locator;
-  readonly favoriteButton: Locator;
+  readonly favouriteButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this.lotContainer = page.locator('[data-testid^="lot-card-container"]');
-    this.favoriteButton = page.getByTitle("favourite").first();
+    this.favouriteButton = page.getByTestId("lot-card-favorite-button").first();
   }
 
-  async getFavoriteLotsCount() {
+  async getFavouriteLotsCount() {
     return this.lotContainer.count();
   }
 
@@ -19,7 +19,7 @@ export class FavoritePage extends HeaderPage {
     await this.page.goto("/en/interests/objects");
   }
 
-  async clickFavoriteButton() {
-    await this.favoriteButton.click();
+  async clickFavouriteButton() {
+    await this.favouriteButton.click();
   }
 }
