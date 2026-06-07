@@ -1,9 +1,6 @@
-import { APIRequestContext, BrowserContext } from "@playwright/test";
+import { BrowserContext } from "@playwright/test";
 
-export async function removeAllFavourites(
-  request: APIRequestContext,
-  context: BrowserContext
-) {
+export async function removeAllFavourites(context: BrowserContext) {
   const page = await context.newPage();
   await page.goto("https://www.catawiki.com/en");
 
@@ -13,7 +10,7 @@ export async function removeAllFavourites(
 
   await page.close();
 
-  const response = await request.get(
+  const response = await context.request.get(
     "https://www.catawiki.com/buyer/api/v3/users/me/interests/lots?page=1&per_page=96&filter=favorites&status=all"
   );
 
@@ -26,7 +23,7 @@ export async function removeAllFavourites(
 
   await Promise.all(
     data.lots.map(async (lot: { id: number }) => {
-      const deleteResponse = await request.delete(
+      const deleteResponse = await context.request.delete(
         `https://www.catawiki.com/buyer/api/v1/users/me/interests/lots/${lot.id}`,
         { headers: { "x-s-csrf-token": csrfToken } }
       );

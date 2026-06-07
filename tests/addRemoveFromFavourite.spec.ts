@@ -10,7 +10,7 @@ test.use({ storageState: ".auth/user.json" });
 // doing cleanup before the test - removing all lots added to favourite
 test.beforeAll(async ({ browser }) => {
   const context = await browser.newContext({ storageState: ".auth/user.json" });
-  await removeAllFavourites(context.request, context);
+  await removeAllFavourites(context);
   await context.close();
 });
 
