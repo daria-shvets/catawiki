@@ -23,13 +23,13 @@ test("user should be able to add and remove lot from favourite", async ({
   const lotPage = new LotPage(page);
   const favouritePage = new FavouritePage(page);
 
-  await test.step("Open lot page", async () => {
+  await test.step("open lot page", async () => {
     await homePage.goto();
     await homePage.searchForItem(searchTerms.book);
     await searchResultsPage.clickLot(1);
   });
 
-  await test.step("Add lot to favourite", async () => {
+  await test.step("add lot to favourite", async () => {
     await lotPage.clickFavouriteButton();
     await favouritePage.goto();
     const countAfterAddingToFavourite =
@@ -37,7 +37,7 @@ test("user should be able to add and remove lot from favourite", async ({
     expect(countAfterAddingToFavourite).toBe(1);
   });
 
-  await test.step("Remove lot from favourite", async () => {
+  await test.step("remove lot from favourite", async () => {
     await favouritePage.clickFavouriteButton();
     await page.reload();
     const countAfterRemovingFromFavourite =

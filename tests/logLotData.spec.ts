@@ -9,23 +9,23 @@ test("should open lot page and log information", async ({ page }) => {
   const searchResultsPage = new SearchResultsPage(page);
   const lotPage = new LotPage(page);
 
-  await test.step("Navigate to Catawiki homepage", async () => {
+  await test.step("navigate to Catawiki homepage", async () => {
     await homePage.goto();
   });
 
-  await test.step("Search for 'train'", async () => {
+  await test.step("search for 'train'", async () => {
     await homePage.searchForItem(searchTerms.train);
   });
 
-  await test.step("Verify search results page is opened", async () => {
+  await test.step("verify search results page is opened", async () => {
     await expect(searchResultsPage.searchPageTestId).toBeVisible();
   });
 
-  await test.step("Click on the second lot", async () => {
+  await test.step("click on the second lot", async () => {
     await searchResultsPage.clickLot(1);
   });
 
-  await test.step("Verify lot page is opened", async () => {
+  await test.step("verify lot page is opened", async () => {
     await expect(lotPage.bidSection).toBeVisible();
     await expect(lotPage.lotName).toBeVisible();
     await expect(lotPage.lotGallery).toBeVisible({ timeout: 10000 });
@@ -35,7 +35,7 @@ test("should open lot page and log information", async ({ page }) => {
     await expect(lotPage.favouriteButton).toBeEnabled();
   });
 
-  await test.step("Log lot name, favourites count and current bid", async () => {
+  await test.step("log lot name, favourites count and current bid", async () => {
     await lotPage.logLotName();
     await lotPage.logFavouriteButtonCount();
     await lotPage.logCurrentBid();

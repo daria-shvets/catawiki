@@ -80,7 +80,8 @@ Pre-test cleanup (removing saved lots) is handled via direct API calls rather th
 │   └── userData.ts
 │   └── testData.ts               # Test data types and values
 ├── scripts/
-│   └── saveStorageState.ts       # Manual auth state capture
+│   ├── saveAuthState.ts          # Captures authenticated session to .auth/user.json
+│   └── saveCookies.ts            # Captures cookie consent state to .auth/cookies.json
 ├── .auth/                        # Gitignored; holds saved session state
 ├── .husky/                       # Pre-commit hooks
 ├── .env.example                  # Environment variable template
@@ -146,7 +147,7 @@ Two separate files are required in `.auth/`:
 **Step 1: Generate `cookies.json`**
 
 ```bash
-npx ts-node scripts/saveStorageState.ts .auth/cookies.json
+npx ts-node scripts/saveCookies.ts
 ```
 
 A browser window will open. Accept the cookie banner only — do not log in. Press **Resume** in the Playwright Inspector.
@@ -154,7 +155,7 @@ A browser window will open. Accept the cookie banner only — do not log in. Pre
 **Step 2: Generate `user.json`**
 
 ```bash
-npx ts-node scripts/saveStorageState.ts .auth/user.json
+npx ts-node scripts/saveAuthState.ts
 ```
 
 A browser window will open. Log in with your test account credentials, then press **Resume** in the Playwright Inspector.
@@ -201,7 +202,7 @@ The authenticated session in `.auth/user.json` contains a short-lived `oauth_tok
 If tests fail with authentication errors (403, user not logged in), regenerate the session:
 
 ```bash
-npx ts-node scripts/saveStorageState.ts .auth/user.json
+npx ts-node scripts/saveAuthState.ts
 ```
 
 Then update the `AUTH_USER_JSON` GitHub Secret with the new file contents.

@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { userSignUpData } from "@test-data/userData";
-import { getEnvVar } from "../utils/env";
+import { getEnvVar } from "@utils/env";
 
 const { firstName } = userSignUpData.validSignUp;
 const { lastName } = userSignUpData.validSignUp;
